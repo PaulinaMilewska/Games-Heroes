@@ -6,8 +6,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-//public interface HeroRepository extends JpaRepository<Hero,Long> {
-public interface HeroRepository extends CrudRepository<Hero,Integer> {
+public interface HeroRepository extends JpaRepository<Hero,Integer> {
+//public interface HeroRepository extends CrudRepository<Hero,Integer> {
     @Override
     List<Hero> findAll();
 }
