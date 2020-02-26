@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Menu</title>
+<!--    <link rel="stylesheet" href="../../static/css/bootstrap.css" th:href="@{/css/bootstrap.css}" type="text/css">-->
+<!--    <link rel="stylesheet" href="../static/css/main.css" th:href="@{/css/main.css}" type="text/css">-->
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+    <style>
+        .action-td{
+            display: inline-flex;
+        }
+
+        .padding5px{
+            padding: 5px;
+        }
+
+        .padding10px{
+            padding: 10px;
+        }
+
+        body {background-color: lemonchiffon;}
+
+    </style>
+</head>
+<body bgcolor="#99CC66">
+<div class="container">
+    <h2>Control panel</h2>
+    <a href="/heroform" class="btn btn-primary">Add new hero</a>
+    <a href="/viewhero" class="btn btn-secondary">All Heroes</a>
+    <a href="/vehicleform" class="btn btn-warning">Add new vehicle</a>
+    <a href="/viewvehicle" class="btn btn-danger">All vehicles</a>
+    <a href="/weaponform" class="btn btn-info">Add new weapon</a>
+    <a href="/viewweapon" class="btn btn-light">All weapons</a>
+</div>
+</body>
+</html>

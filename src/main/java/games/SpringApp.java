@@ -6,7 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @ComponentScan(basePackages =
-        "games.heroes"
+        {"games.heroes", "games.vehicles", "games.weapons"}
 )
 
 @SpringBootApplication

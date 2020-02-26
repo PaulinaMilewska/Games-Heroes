@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Hero Add Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <style>
+        .action-td{
+            display: inline-flex;
+        }
+
+        .padding5px{
+            padding: 5px;
+        }
+
+        .padding10px{
+            padding: 10px;
+        }
+
+        body {background-color: lemonchiffon;}
+
+    </style>
+</head>
+<body>
+<hr>
+<div class="container">
+    <h2>Hero Form</h2>
+    <div class="form-group">
+        <form action="#" class="form-group" th:action="@{/savehero}" th:object="${hero}" method="post">
+            <input type="hidden" th:field="*{id}">
+            <label>Name<input type="text" class="form-control" th:field="*{name}" placeholder="Name" required></label><br>
+            <label>Force<input type="text" class="form-control" th:field="*{force}" placeholder="Force" required></label><br>
+            <label>Gem<input type="text" class="form-control" th:field="*{gem}" placeholder="Gem" required></label><br>
+             <input type="submit" class="btn btn-dark" value="Save">
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

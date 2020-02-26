@@ -18,7 +18,7 @@ import java.util.List;
 public class VehicleController {
 
     private List<Vehicle> list = new ArrayList<>();
-    private List<Hero> listHero;
+    private List<Hero> listHero = new ArrayList<>();
 
     @Autowired
     private HeroDao heroDao;
@@ -31,6 +31,10 @@ public class VehicleController {
         listHero = heroDao.getHeroes();
     }
 
+
+    public VehicleController() {
+    }
+
     @RequestMapping(value = "/vehicleform", method = RequestMethod.GET)
     public String showform(Model model) {
         listHero = heroDao.getHeroes();
@@ -40,12 +44,12 @@ public class VehicleController {
     }
 
     @RequestMapping("/savevehicle")
-    public ModelAndView saveCar(@ModelAttribute(value = "vehicle") Vehicle vehicle,
-                                @ModelAttribute(value = "vehicle.id") String vehicle_id_Sting) {
-        int vehicle_id = Integer.parseInt(vehicle_id_Sting);
+    public ModelAndView saveVehicle(@ModelAttribute(value = "vehicle") Vehicle vehicle,
+                                @ModelAttribute(value = "hero.id") String hero_id_Sting) {
+        int hero_id = Integer.parseInt(hero_id_Sting);
         listHero = heroDao.getHeroes();
 
-        vehicle.setHeroes(listHero.get(vehicle_id));
+        vehicle.setHero(listHero.get(hero_id));
         if (vehicle.getId() == 0) {
 
             vehicle.setId(list.size()+1);
@@ -57,7 +61,7 @@ public class VehicleController {
 
             listHero = heroDao.getHeroes();
             int index = vehicle.getId();
-            vehicle.setHeroes(listHero.get(index));
+            vehicle.setHero(listHero.get(index));
             vehicleDao.updateVehicle(vehicle);
 
 //            }
@@ -80,9 +84,19 @@ public class VehicleController {
     }
 
     @RequestMapping("/viewvehicle")
-    public ModelAndView viewvehicle(Model model) {
+    public ModelAndView viewvehicles(Model model) {
+        System.out.println();
         list = vehicleDao.getVehicles();
         return new ModelAndView("vehicle/viewvehicle", "list", list);
+//        return new ModelAndView("hero/herohero");
+//        return new ModelAndView("hero/viewvehicle", "list", list);
+    }
+
+    @RequestMapping("/viewvehicles")
+    public String viewvehicles() {
+
+        return "vehicle/viewvehicles";
+//        return "hero/herohero";
     }
 
     private Vehicle getVehicleById(@RequestParam Integer vehicle_id) {
@@ -94,7 +108,7 @@ public class VehicleController {
         vehicleTemp.setName(vehicle.getName());
         vehicleTemp.setSpeed(vehicle.getSpeed());
         vehicleTemp.setValue(vehicle.getValue());
-        vehicleTemp.setHeroes(vehicle.getHeroes());
+        vehicleTemp.setHero(vehicle.getHero());
 
     }
 

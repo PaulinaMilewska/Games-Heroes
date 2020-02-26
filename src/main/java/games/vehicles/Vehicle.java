@@ -36,7 +36,7 @@ public class Vehicle {
     @JoinColumn(name = "hero_id", nullable = false, referencedColumnName="id")
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    public Hero heroes;
+    public Hero hero;
 
     public Vehicle() {
     }

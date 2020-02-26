@@ -75,12 +75,13 @@ public class WeaponController {
 
     @RequestMapping("/viewweapon")
     public ModelAndView viewweapon(Model model) {
-        return new ModelAndView("viewweapon", "weaponList", weaponList);
+        weaponList = weaponDao.getWeapons();
+        return new ModelAndView("weapon/viewweapon", "weaponList", weaponList);
     }
 
     private Weapon getWeaponById(@RequestParam int weapon_id) {
         return weaponList.stream().filter(f -> f.getId() == weapon_id).findFirst().get();
     }
-    
+
 
 }

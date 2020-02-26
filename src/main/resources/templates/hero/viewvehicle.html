@@ -3,7 +3,7 @@
       xmlns:background-color="http://java.sun.com/JSP/Page">
 <head>
     <meta charset="UTF-8">
-    <title>All Vehicles List</title>
+    <title>All Employees List</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -34,11 +34,11 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Speed</th>
-                <th>Value</th>
-                <th>HeroName</th>
+                <th>id</th>
+                <th>name</th>
+                <th>speed</th>
+                <th>value</th>
+                <th>HeroID</th>
 
                 <th>Action</th>
             </tr>
@@ -49,7 +49,7 @@
                 <td th:text="${vehicle.name}"></td>
                 <td th:text="${vehicle.speed}"></td>
                 <td th:text="${vehicle.value}"></td>
-                <td th:text="${vehicle.hero.name}"></td>
+                <td th:text="${vehicle.hero.id}"></td>
 
                 <td class="action-td">
                     <form method="post" class="padding5px" th:action="#" th:action="@{/deletevehicle}">

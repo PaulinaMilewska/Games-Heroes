@@ -28,6 +28,11 @@ public class HeroController {
         return "index";
     }
 
+    @RequestMapping("/herohero")
+    public String indexGetss() {
+        return "hero/herohero";
+    }
+
     @RequestMapping(value = "/heroform", method = RequestMethod.GET)
     public String showform(Model model) {
         model.addAttribute("hero", new Hero());
@@ -39,11 +44,17 @@ public class HeroController {
         System.out.println();
         if (hero.getId() == 0) {
 
-            System.out.println("Add new hero");
+            try {
+                heroDao.createHero(hero);
+//                employeesServiceImpl.create(employees);
+            } catch (NullPointerException e) {
+                e.printStackTrace();
+            }
 
-            heroDao.createHero(hero);
-            hero.setId(1);
-            list.add(hero);
+//            System.out.println("Add new hero");
+//            heroDao.createHero(hero);
+//            hero.setId(1);
+//            list.add(hero);
         } else {
             heroDao.updateHero(hero);
         }
@@ -52,7 +63,6 @@ public class HeroController {
 
     @RequestMapping(value = "/edithero")
     public ModelAndView edit(@RequestParam(value = "hero_id") String hero_id) {
-        System.out.printf("get employee with id:", hero_id);
         Hero hero = getHeroById(Integer.parseInt(hero_id));
 
         return new ModelAndView("hero/heroform", "hero", hero);
@@ -73,7 +83,7 @@ public class HeroController {
     }
 
     @RequestMapping("/viewhero")
-    public ModelAndView viewemployees(Model model) {
+    public ModelAndView viewheroes(Model model) {
         list = heroDao.getHeroes();
         return new ModelAndView("hero/viewhero", "list", list);
     }

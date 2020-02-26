@@ -4,6 +4,7 @@ import games.heroes.Hero;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -48,6 +49,30 @@ public class Weapon {
     @EqualsAndHashCode.Exclude
     public Set<Hero> heroSet;
 
+    public Set<Hero> getHeroSet() {
+        if (heroSet == null) {
+            heroSet = new HashSet<>();
+        }
+        return heroSet;
+    }
+
     public Weapon() {
     }
+
+    public Weapon( Set<Hero> heroSet, String name, double knockback, int useTime, int value) {
+        this.heroSet = heroSet;
+        this.name = name;
+        this.knockback = knockback;
+        this.useTime = useTime;
+        this.value = value;
+    }
+
+    public Weapon( Integer id, String name, double knockback, int useTime, int value) {
+        this.id = id;
+        this.name = name;
+        this.knockback = knockback;
+        this.useTime = useTime;
+        this.value = value;
+    }
+
 }
