@@ -63,9 +63,10 @@ public class WeaponController {
             weapon.setHeroSet(heroHashSet);
 
             if (weapon.getId() == null) {
+                weaponList = weaponDao.getWeapons();
                 weapon.setId(weaponList.size());
                 weaponDao.createWeapon(weapon);
-                weaponList = weaponDao.getWeapons();
+
 
                 weaponList.add(weapon);
             } else {
