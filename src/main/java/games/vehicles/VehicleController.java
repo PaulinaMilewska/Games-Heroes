@@ -19,6 +19,7 @@ public class VehicleController {
 
     private List<Vehicle> list = new ArrayList<>();
     private List<Hero> listHero = new ArrayList<>();
+    private Hero hero = new Hero();
 
     @Autowired
     private HeroDao heroDao;
@@ -46,32 +47,30 @@ public class VehicleController {
     @RequestMapping("/savevehicle")
     public ModelAndView saveVehicle(@ModelAttribute(value = "vehicle") Vehicle vehicle,
                                 @ModelAttribute(value = "hero.id") String hero_id_Sting) {
-        int hero_id = Integer.parseInt(hero_id_Sting);
+        Integer hero_id = Integer.parseInt(hero_id_Sting);
         listHero = heroDao.getHeroes();
 
         vehicle.setHero(listHero.get(hero_id));
-        if (vehicle.getId() == 0) {
-
-            vehicle.setId(list.size()+1);
+        if (vehicle.getId() == null) {
+            vehicle.setId(1);
+//            vehicle.setId(list.size()+1);
             vehicleDao.createVehicle(vehicle);
-            vehicle.setId(list.size());
+//            vehicle.setId(list.size());
             list.add(vehicle);
 
         } else {
 
             listHero = heroDao.getHeroes();
             int index = vehicle.getId();
-            vehicle.setHero(listHero.get(index));
+//            vehicle.setHero(listHero.get(index));
+            vehicle.setHero(hero);
             vehicleDao.updateVehicle(vehicle);
 
-//            }
             list.set(vehicle.getId() - 1, vehicle);
             updateVehicleInList(vehicle);
         }
         return new ModelAndView("redirect:/viewvehicle");
     }
-
-    Hero hero;
 
     @RequestMapping(value = "/deletevehicle", method = RequestMethod.POST)
     public ModelAndView delete(@RequestParam(value = "vehicle_id") String vehicle_id) {
@@ -83,6 +82,16 @@ public class VehicleController {
         return new ModelAndView("redirect:/viewvehicle");
     }
 
+    @RequestMapping(value = "/editvehicle")
+    public ModelAndView edit(@RequestParam(value = "vehicle_id") String vehicle_id) {
+        System.out.println();
+        Integer vehicleId = Integer.parseInt(vehicle_id);
+        Vehicle vehicle = getVehicleById(vehicleId);
+        hero = vehicle.getHero();
+
+        return new ModelAndView("vehicle/vehicleeditform", "vehicle", vehicle);
+    }
+
     @RequestMapping("/viewvehicle")
     public ModelAndView viewvehicles(Model model) {
         System.out.println();
@@ -92,12 +101,6 @@ public class VehicleController {
 //        return new ModelAndView("hero/viewvehicle", "list", list);
     }
 
-    @RequestMapping("/viewvehicles")
-    public String viewvehicles() {
-
-        return "vehicle/viewvehicles";
-//        return "hero/herohero";
-    }
 
     private Vehicle getVehicleById(@RequestParam Integer vehicle_id) {
         return list.stream().filter(f -> f.getId() == vehicle_id).findFirst().get();

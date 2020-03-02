@@ -32,7 +32,21 @@
             <!--            <input type="hidden" th:field="*{id}">-->
             <input type="text" class="form-control" th:field="*{name}" placeholder="Name"><br>
             <input type="text" class="form-control" th:field="*{knockback}" placeholder="Knockback"><br>
+            <input type="text" class="form-control" th:field="*{useTime}" placeholder="UseTime"><br>
             <input type="text" class="form-control" th:field="*{value}" placeholder="Value"><br>
+
+            <label>Choose hero that may use this weapon:<br>
+                <i> (Hold Ctrl / Command to select multiple items.)</i><br>
+                <br>
+                <!--                zapamiętuje tylko pierwszego wybranego pracownika z listy :(-->
+                <select class="form-control" multiple>
+                    <option th:each="item : ${heroList}"
+                            th:selected="${heroIds.add(item.id)}"
+                            th:value="${item.id}"
+                            th:text="${item.name}"></option>
+                </select>
+            </label><br>
+
             <input type="submit" class="btn btn-dark">
         </form>
         <hr>

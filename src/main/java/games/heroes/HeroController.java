@@ -41,22 +41,19 @@ public class HeroController {
 
     @RequestMapping("/savehero")
     public ModelAndView saveHero(@ModelAttribute(value = "hero") Hero hero) {
-        System.out.println();
-        if (hero.getId() == 0) {
 
+        if (hero.getId() == null) {
+            hero.setId(1);
             try {
                 heroDao.createHero(hero);
-//                employeesServiceImpl.create(employees);
             } catch (NullPointerException e) {
                 e.printStackTrace();
             }
-
-//            System.out.println("Add new hero");
-//            heroDao.createHero(hero);
-//            hero.setId(1);
-//            list.add(hero);
+            list.add(hero);
         } else {
             heroDao.updateHero(hero);
+            int index = hero.getId();
+            hero.setId(index);
         }
         return new ModelAndView("redirect:/viewhero");
     }
@@ -75,6 +72,7 @@ public class HeroController {
 
     @RequestMapping(value = "/deletehero", method = RequestMethod.POST)
     public ModelAndView delete(@RequestParam(value = "hero_id") String hero_id) {
+        System.out.println("iiiiiiiiidddddddddddddd    "+hero_id);
         Hero heroToDelete = getHeroById(Integer.parseInt(hero_id));
         list.remove(heroToDelete);
         heroDao.deleteHero(heroToDelete);
